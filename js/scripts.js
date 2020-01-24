@@ -40,6 +40,18 @@ function validateForm(e) {
   }
 }
 
+function getUserDataObj() {
+    return {
+        userName: getUserName(),
+        firstName: getFirstName(),
+        lastName: getLastName(),
+        email: getEmail(),
+        phoneNumber: getPhoneNumber(),
+        password: getPassword(),
+        confirmPassword: getConfirmPassword()
+    };
+}
+
 function renderRegisteredUsers() {
   document.getElementById("registered-users").innerHTML = "";
   registeredUsers.forEach(function(registeredUser) {
@@ -88,6 +100,36 @@ function validateLastName() {
   var _lastName = getLastName();
 
   return _lastName !== "";
+}
+
+/**
+ * this function supposely validates submitted username
+ * @returns [Boolean] true when valid, false otherwise
+ */
+function validateFirstName(){
+    var _firstName = getFirstName();
+    
+    return (_firstName !== '');
+}
+
+/**
+ * this function supposely validates submitted username
+ * @returns [Boolean] true when valid, false otherwise
+ */
+function validateLastName(){
+    var _lastName = getLastName();
+    
+    return (_lastName !== '');
+}
+
+/**
+ * this function supposely validates submitted username
+ * @returns [Boolean] true when valid, false otherwise
+ */
+function validatePhoneNumber(){
+    var _phoneNumber = getPhoneNumber();
+    
+    return (!isNaN(_phoneNumber));
 }
 
 /**
@@ -204,6 +246,30 @@ function getLastName() {
   } else {
     return document.registration.last_name.value;
   }
+}
+
+function getFirstName() {
+    if (typeof(document.registration.firstname.value) === 'undefined') {
+        return '';
+    } else {
+        return document.registration.firstname.value;
+    }   
+}
+
+function getLastName() {
+    if (typeof(document.registration.lastname.value) === 'undefined') {
+        return '';
+    } else {
+        return document.registration.lastname.value;
+    }   
+}
+
+function getPhoneNumber() {
+    if (typeof(document.registration.phonenumber.value) === 'undefined') {
+        return '';
+    } else {
+        return document.registration.phonenumber.value;
+    }   
 }
 
 function getEmail() {
