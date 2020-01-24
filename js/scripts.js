@@ -30,12 +30,13 @@ function validateForm(e) {
     // add code to update registeredUsers array with new user and call render function
     // TODO
     registeredUsers.push(_newUser);
-    renderRegisteredUsers();
-    document.registration.reset(); // reset form input fields
 
-    if ((registeredUsers.length = 5)) {
+    if (registeredUsers.length > 5) {
       registeredUsers.shift();
     }
+
+    renderRegisteredUsers();
+    document.registration.reset(); // reset form input fields
   }
 }
 
