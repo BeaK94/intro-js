@@ -215,7 +215,7 @@ function validatePassword() {
 
 //string to be examined; return true is there's at least one number in sample, otherwise false
 function checkForNumber(sample) {
-  if (sample.match(/[0-9]+/g).length < 1) {
+  if (sample.match(/[0-9]+/g) == null) {
     return false;
   }
   return true;
@@ -223,7 +223,7 @@ function checkForNumber(sample) {
 
 //string to be examined; return true is there's at least one capital letter in sample, otherwise false
 function checkForCapital(sample) {
-  if (sample.match(/[A-Z]+/g).length < 1) {
+  if (sample.match(/[A-Z]+/g) == null) {
     return false;
   }
   return true;
