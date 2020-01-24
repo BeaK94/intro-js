@@ -40,17 +40,18 @@ function validateForm(e) {
   }
 }
 
-function getUserDataObj() {
-    return {
-        userName: getUserName(),
-        firstName: getFirstName(),
-        lastName: getLastName(),
-        email: getEmail(),
-        phoneNumber: getPhoneNumber(),
-        password: getPassword(),
-        confirmPassword: getConfirmPassword()
-    };
-}
+/* used by Hoang to return the object to the list under the registration form
+    function getUserDataObj() {
+  return {
+    userName: getUserName(),
+    firstName: getFirstName(),
+    lastName: getLastName(),
+    email: getEmail(),
+    phoneNumber: getPhoneNumber(),
+    password: getPassword(),
+    confirmPassword: getConfirmPassword()
+  };
+} */
 
 function renderRegisteredUsers() {
   document.getElementById("registered-users").innerHTML = "";
@@ -106,30 +107,30 @@ function validateLastName() {
  * this function supposely validates submitted username
  * @returns [Boolean] true when valid, false otherwise
  */
-function validateFirstName(){
-    var _firstName = getFirstName();
-    
-    return (_firstName !== '');
+function validateFirstName() {
+  var _firstName = getFirstName();
+
+  return _firstName !== "";
 }
 
 /**
  * this function supposely validates submitted username
  * @returns [Boolean] true when valid, false otherwise
  */
-function validateLastName(){
-    var _lastName = getLastName();
-    
-    return (_lastName !== '');
+function validateLastName() {
+  var _lastName = getLastName();
+
+  return _lastName !== "";
 }
 
 /**
  * this function supposely validates submitted username
  * @returns [Boolean] true when valid, false otherwise
  */
-function validatePhoneNumber(){
-    var _phoneNumber = getPhoneNumber();
-    
-    return (!isNaN(_phoneNumber));
+function validatePhoneNumber() {
+  var _phoneNumber = getPhoneNumber();
+
+  return !isNaN(_phoneNumber);
 }
 
 /**
@@ -199,11 +200,32 @@ function validatePassword() {
     return false;
   }
 
-  // I want the password to include a number
-  //   if (_password.includes(!NaN)) {
-  //     return false;
-  //   }
+  // if the number of numbers is less than 1
+  if (!checkForNumber(_password)) {
+    return false;
+  }
 
+  // if the number of capital letters is less than 1
+  if (!checkForCapital(_password)) {
+    return false;
+  }
+
+  return true;
+}
+
+//string to be examined; return true is there's at least one number in sample, otherwise false
+function checkForNumber(sample) {
+  if (sample.match(/[0-9]+/g).length < 1) {
+    return false;
+  }
+  return true;
+}
+
+//string to be examined; return true is there's at least one capital letter in sample, otherwise false
+function checkForCapital(sample) {
+  if (sample.match(/[A-Z]+/g).length < 1) {
+    return false;
+  }
   return true;
 }
 
@@ -248,28 +270,12 @@ function getLastName() {
   }
 }
 
-function getFirstName() {
-    if (typeof(document.registration.firstname.value) === 'undefined') {
-        return '';
-    } else {
-        return document.registration.firstname.value;
-    }   
-}
-
-function getLastName() {
-    if (typeof(document.registration.lastname.value) === 'undefined') {
-        return '';
-    } else {
-        return document.registration.lastname.value;
-    }   
-}
-
 function getPhoneNumber() {
-    if (typeof(document.registration.phonenumber.value) === 'undefined') {
-        return '';
-    } else {
-        return document.registration.phonenumber.value;
-    }   
+  if (typeof document.registration.phonenumber.value === "undefined") {
+    return "";
+  } else {
+    return document.registration.phonenumber.value;
+  }
 }
 
 function getEmail() {
