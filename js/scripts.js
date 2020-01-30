@@ -1,5 +1,10 @@
 var registeredUsers = []; // this array stores valid usernames until the next pageload
 
+$(document).ready(function() {
+  //only when the page is fully loaded, do the following:
+  $("#registerButton").on("click", validateForm);
+});
+
 function validateForm(e) {
   e.preventDefault(); // stop the submit button from refreshing the page
   console.log("validating....");
@@ -47,12 +52,13 @@ function validateForm(e) {
     firstName: getFirstName(),
     lastName: getLastName(),
     email: getEmail(),
-    phoneNumber: getPhoneNumber(),
+    phoneNumber: getPhone(),
     password: getPassword(),
     confirmPassword: getConfirmPassword()
   };
 } */
 
+// Vanilla JS render function
 function renderRegisteredUsers() {
   document.getElementById("registered-users").innerHTML = "";
   registeredUsers.forEach(function(registeredUser) {
@@ -70,6 +76,17 @@ function renderRegisteredUsers() {
     document.getElementById("registered-users").appendChild(_newRegUser);
   });
 }
+
+// jQuery render function
+/* function renderRegisteredUsers() {
+  $("#registered-users").empty();
+  $.each(registeredUsers, function(registeredUser) {
+    $("<li>")
+      .text(JSON.stringify(registeredUser))
+      .appendTo("#registered-users");
+  });
+} */
+// doesn't work, returns 0, 1, 2, indexes? - try with .each and valueOf; works with mix of Vanilla
 
 /* original render fucntion
 function renderRegisteredUsers() {
@@ -247,68 +264,61 @@ function checkSpace(sample) {
  * @returns [Boolean] true when valid, false otherwise
  */
 function getUserName() {
-  if (typeof document.registration.username.value === "undefined") {
+  // Vanilla JS: (typeof document.registration.username.value === "undefined"), return document.registration.username.value
+  if (typeof $('[name="username"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.username.value;
+    return $('[name="username"]').val();
   }
 }
 
 function getFirstName() {
-  if (typeof document.registration.first_name.value === "undefined") {
+  if (typeof $('[name="first_name"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.first_name.value;
+    return $('[name="first_name"]').val();
   }
 }
 
 function getLastName() {
-  if (typeof document.registration.last_name.value === "undefined") {
+  if (typeof $('[name="last_name"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.last_name.value;
-  }
-}
-
-function getPhoneNumber() {
-  if (typeof document.registration.phonenumber.value === "undefined") {
-    return "";
-  } else {
-    return document.registration.phonenumber.value;
+    return $('[name="last_name"]').val();
   }
 }
 
 function getEmail() {
   // TODO
-  if (typeof document.registration.email.value === "undefined") {
+  if (typeof $('[name="email"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.email.value;
+    return $('[name="email"]').val();
   }
 }
 
 function getPhone() {
-  if (typeof document.registration.phone.value === "undefined") {
+  if (typeof $('[name="phone"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.phone.value;
+    return $('[name="phone"]').val();
   }
 }
 
 function getPassword() {
   // TODO
-  if (typeof document.registration.password.value === "undefined") {
+  if (typeof $('[name="password"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.password.value;
+    return $('[name="password"]').val();
   }
 }
 
 function getConfirmPassword() {
   // TODO
-  if (typeof document.registration.password_confirm.value === "undefined") {
+  if (typeof $('[name="password_confirm"]').val() === "undefined") {
     return "";
   } else {
-    return document.registration.password_confirm.value;
+    return $('[name="password_confirm"]').val();
   }
 }
