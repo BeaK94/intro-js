@@ -22,6 +22,9 @@
     // TODO
     //remove "active" from the first img
     items[slide].classList.remove("active");
+    // jQuery removing 'active' class:
+    // $('.slider__photo')[slide].removeClass('active') << won't work, because $() is a jQuery list, $()[index] is a normal JS!!
+    //$('.slider__photo').eq(slide).removeClass('active') << will work, eq(index) accesses the jQuery list and keeps the element as jQuery element, so we can use jQ method
     //change the index of the one I want to be active to the next one of the class of images
     slide++;
     if (slide < totalItems) {
