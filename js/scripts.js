@@ -1,16 +1,21 @@
 (function() {
-  var itemClassName = "slider__photo";
-  (items = document.getElementsByClassName(itemClassName)),
-    (totalItems = items.length),
-    (slide = 0);
+  //var itemClassName = "slider__photo";
+  var items = $(".slider__photo");
+  totalItems = items.length;
+  slide = 0;
+  //items = document.getElementsByClassName(itemClassName)) --
 
   // Set event listeners
   function setEventListeners() {
-    var next = document.getElementsByClassName("slider__button--next")[0],
-      prev = document.getElementsByClassName("slider__button--prev")[0];
+    var next = $(".slider__button--next")[0],
+      //document.getElementsByClassName("slider__button--next")[0],
+      prev = $(".slider__button--prev")[0];
+    //document.getElementsByClassName("slider__button--prev")[0];
 
-    next.addEventListener("click", getNext);
-    prev.addEventListener("click", getPrev);
+    $(next).on("click", getNext);
+    //next.addEventListener("click", getNext);
+    $(prev).on("click", getPrev);
+    //prev.addEventListener("click", getPrev);
   }
 
   function getNext() {
