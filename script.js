@@ -29,11 +29,25 @@ $(document).ready(function() {
 
   //adding printing button to both pages, a button that prints the page
   $(".navbar").append(
-    $('<li><button id="print-btn">Print this page</button></li>')
+    $('<li><button id="print-btn"></button></li>')
   );
   $("#print-btn").on("click", function() {
     window.print();
   });
-});
 
-//style the button, add icon, do other tasks
+  
+//making the first word of all person-card paragraphs
+
+//$.each($('p.card-text'), function() {$('p.card-text').text().slice(0,1).css("font-weight", "bold");}); --- doesnt work. The line till /slice)0,1) returns a string of the first LETTER of the paragraph I want
+//$('.card-text').slice(0,1).css("font-weight", "bold")
+//split(' ')[0].css("font-weight", "bold")
+
+
+//moving Michael before Henry. Add IDs to Michael and Henry and then insertBefore()
+$('.person-card').last().attr("id", "michael")
+$('.person-card').first().attr("id", "henry")
+$('#michael').insertBefore($('#henry'))
+
+//changing "people" headline and "people" in navbar into "personnel"
+$('#people h2, [href="#people"]').html("personnel");
+});

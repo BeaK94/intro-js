@@ -236,6 +236,43 @@ em {
   background: #f3d350;
 }
 
+#print-btn {
+  display: inline-block;
+  background-color: #504f4f;
+  border: none;
+  border-radius: 5px;
+  margin: 0 0.5rem;
+  padding: 5px;
+ 
+}
+/* 
+#print-btn {
+  background-color: red;
+  color: blue;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: ;
+} */
+
+#print-btn:hover {
+  cursor: pointer;
+  background-color: #383838;
+}
+
+#print-btn:active {
+  background-color: #242424;
+}
+
+#print-btn::after {
+  content: "\f02f";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  color: #fff;
+}
+
 @media screen and (min-width: 600px) {
   .nav .nav-elements {
     display: -webkit-box;
@@ -271,14 +308,6 @@ em {
   }
 }
 
-#print-btn {
-  background-color: red;
-  color: blue;
-  border: none;
-  border-radius: 5px;
-  padding: 5px;
-  margin: ;
-}
 
 /* nav */
 
