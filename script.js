@@ -7,7 +7,7 @@ $(document).ready(function() {
     }
   }); */
 
-  $("#top-button").on("click", function(e) {
+  $(".top-button").on("click", function(e) {
     e.preventDefault();
     $("html, body").animate({ scrollTop: 0 }, "300");
   });
@@ -62,4 +62,52 @@ $(document).ready(function() {
 
   //changing "people" headline and "people" in navbar into "personnel"
   $('#people h2, [href="#people"]').html("personnel");
+
+  //an API call to Weather API to display Helsinki weather in the floating unclickable button
+  $.ajax({
+    url:
+      "http://api.openweathermap.org/data/2.5/weather?q=helsinki&units=metric&APPID=5fa0b75646bc8623b0656789ee77d610"
+  }).done(function(resp) {
+    console.log(resp.main.temp);
+    console.log(resp.main.feels_like);
+    $(".weather-button").html(
+      "Temperature in Helsinki is " +
+        resp.main.temp +
+        " and it feels like " +
+        resp.main.feels_like
+    );
+  });
+
+  //an API call to Weather API to display Silesia weather in the list in nav
+  $.ajax({
+    url:
+      "http://api.openweathermap.org/data/2.5/find?lat=50.26&lon=19.03&cnt=5&units=metric&APPID=5fa0b75646bc8623b0656789ee77d610"
+  }).done(function(resp) {
+    /* resp.list.forEach(function(place) {
+      console.log(
+        place.name +
+          ": " +
+          place.main.temp +
+          " (" +
+          place.main.feels_like +
+          "). "
+      );
+    }); */
+
+    function getWeatherInfo() {
+      var result = "";
+      resp.list.forEach(function(place) {
+        result +=
+          place.name +
+          ": " +
+          place.main.temp +
+          " (" +
+          place.main.feels_like +
+          "). ";
+      });
+      return result;
+    }
+
+    $(".weather-silesia").html(getWeatherInfo());
+  });
 });
