@@ -1,3 +1,9 @@
+/**
+ * check for all the getPhone, getUsername etc and change to variables or get('username')
+ * check for double code, especially getPhone and getPhoneNumber
+ * CLEAN UP!
+ */
+
 var registeredUsers = []; // this array stores valid usernames until the next pageload
 
 $(document).ready(function() {
@@ -6,6 +12,14 @@ $(document).ready(function() {
 });
 
 function validateForm(e) {
+  var _userName = get("username");
+  var _firstName = get("first_name");
+  var _lastName = get("last_name");
+  var _email = get("email");
+  var _phone = get("phone");
+  var _password = get("password");
+  var _password_confirm = get("password_confirm");
+
   e.preventDefault(); // stop the submit button from refreshing the page
   console.log("validating....");
 
@@ -25,7 +39,7 @@ function validateForm(e) {
     validatePassword()
   ) {
     var _newUser = {
-      username: getUserName(),
+      username: _userName,
       fname: getFirstName(),
       lname: getLastName(),
       email: getEmail(),
@@ -155,7 +169,7 @@ function validatePhoneNumber() {
  * @returns [Boolean] true when valid, false otherwise
  */
 function validateEmail() {
-  var _email = getEmail();
+  var _email = get("email");
 
   if (checkSpace(_email) === true) {
     return false;
@@ -263,62 +277,17 @@ function checkSpace(sample) {
  *
  * @returns [Boolean] true when valid, false otherwise
  */
+
 function getUserName() {
-  // Vanilla JS: (typeof document.registration.username.value === "undefined"), return document.registration.username.value
-  if (typeof $('[name="username"]').val() === "undefined") {
+  // Vanilla JS: (typeof (document.registration.username.value === "undefined"), return document.registration.username.value
+  if (typeof document.registration.username.value === "undefined") {
     return "";
   } else {
-    return $('[name="username"]').val();
+    return document.registration.username.value;
   }
 }
 
-function getFirstName() {
-  if (typeof $('[name="first_name"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="first_name"]').val();
-  }
-}
-
-function getLastName() {
-  if (typeof $('[name="last_name"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="last_name"]').val();
-  }
-}
-
-function getEmail() {
-  // TODO
-  if (typeof $('[name="email"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="email"]').val();
-  }
-}
-
-function getPhone() {
-  if (typeof $('[name="phone"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="phone"]').val();
-  }
-}
-
-function getPassword() {
-  // TODO
-  if (typeof $('[name="password"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="password"]').val();
-  }
-}
-
-function getConfirmPassword() {
-  // TODO
-  if (typeof $('[name="password_confirm"]').val() === "undefined") {
-    return "";
-  } else {
-    return $('[name="password_confirm"]').val();
-  }
+function get(param) {
+  var _temp = $('[name="' + param + '"]').val();
+  return typeof _temp === "undefined" ? "" : _temp;
 }
