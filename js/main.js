@@ -1,11 +1,11 @@
-(function($) {
+(function ($) {
   "use strict";
 
   // bootstrap dropdown hover
 
   // loader
-  var loader = function() {
-    setTimeout(function() {
+  var loader = function () {
+    setTimeout(function () {
       if ($("#loader").length > 0) {
         $("#loader").removeClass("show");
       }
@@ -14,13 +14,13 @@
   loader();
 
   $("nav .dropdown").hover(
-    function() {
+    function () {
       var $this = $(this);
       $this.addClass("show");
       $this.find("> a").attr("aria-expanded", true);
       $this.find(".dropdown-menu").addClass("show");
     },
-    function() {
+    function () {
       var $this = $(this);
       $this.removeClass("show");
       $this.find("> a").attr("aria-expanded", false);
@@ -29,7 +29,7 @@
   );
 
   var offcanvas_toggle = $(".js-offcanvas-toggle");
-  offcanvas_toggle.on("click", function() {
+  offcanvas_toggle.on("click", function () {
     if ($("body").hasClass("offcanvas-open")) {
       $("body").removeClass("offcanvas-open");
     } else {
@@ -37,7 +37,7 @@
     }
   });
 
-  $(document).click(function(e) {
+  $(document).click(function (e) {
     var container = $(".js-offcanvas-toggle, #offcanvas_menu");
     if (!container.is(e.target) && container.has(e.target).length === 0) {
       if ($("body").hasClass("offcanvas-open")) {
@@ -46,15 +46,15 @@
     }
   });
 
-  $("#date-countdown").countdown("2020/10/10", function(event) {
+  $("#date-countdown").countdown("2020/10/10", function (event) {
     var $this = $(this).html(
       event.strftime(
         "" +
-          '<span class="countdown-block"><span class="label">%w</span> weeks </span>' +
-          '<span class="countdown-block"><span class="label">%d</span> days </span>' +
-          '<span class="countdown-block"><span class="label">%H</span> hr </span>' +
-          '<span class="countdown-block"><span class="label">%M</span> min </span>' +
-          '<span class="countdown-block"><span class="label">%S</span> sec</span>'
+        '<span class="countdown-block"><span class="label">%w</span> weeks </span>' +
+        '<span class="countdown-block"><span class="label">%d</span> days </span>' +
+        '<span class="countdown-block"><span class="label">%H</span> hr </span>' +
+        '<span class="countdown-block"><span class="label">%M</span> min </span>' +
+        '<span class="countdown-block"><span class="label">%S</span> sec</span>'
       )
     );
   });
@@ -185,10 +185,10 @@
     }
   });
 
-  var contentWayPoint = function() {
+  var contentWayPoint = function () {
     var i = 0;
     $(".element-animate").waypoint(
-      function(direction) {
+      function (direction) {
         if (
           direction === "down" &&
           !$(this.element).hasClass("element-animated")
@@ -196,10 +196,10 @@
           i++;
 
           $(this.element).addClass("item-animate");
-          setTimeout(function() {
-            $("body .element-animate.item-animate").each(function(k) {
+          setTimeout(function () {
+            $("body .element-animate.item-animate").each(function (k) {
               var el = $(this);
-              setTimeout(function() {
+              setTimeout(function () {
                 var effect = el.data("animate-effect");
                 if (effect === "fadeIn") {
                   el.addClass("fadeIn element-animated");
@@ -224,14 +224,14 @@
   /* EVENT LISTENERS EXERCISE */
 
   //show popup1 when mouse leaves the window
-  document.addEventListener("mouseleave", function(event) {
+  document.addEventListener("mouseleave", function (event) {
     document.getElementById("popup1").style.visibility = "visible";
   });
 
   //hide popup1 when clicked on X button
-  $('#popup1 .close').on("click", function(event) {
-      document.getElementById("popup1").style.visibility = "hidden";
-    });
+  $("#popup1 .close").on("click", function (event) {
+    document.getElementById("popup1").style.visibility = "hidden";
+  });
 
   //email input validation
 
@@ -254,32 +254,50 @@
   /* $('form').find('.button').on is the jQuery way of finding the submit GamepadButton, more reliable than the order of an array */
   document
     .getElementsByClassName("button")[0]
-    .addEventListener("click", function() {
+    .addEventListener("click", function () {
       if (validateEmail(document.subscribe.subscribe_pemail)) {
         document.getElementById("popup1").style.visibility = "hidden";
         document.getElementById("popup2").style.visibility = "visible";
       }
     });
 
-
   // hide popup2 when clicked on its X button
-  $("#popup2 .close")
-    .on("click", function() {
-      document.getElementById("popup2").style.visibility = "hidden";
-    });
+  $("#popup2 .close").on("click", function () {
+    document.getElementById("popup2").style.visibility = "hidden";
+  });
 
   // removing the onclick function linked to the button in th HTML file (throwing an error in the console)
   $('form[class="button"]').remove("onclick");
 
   // add a button to click it and show pop up 3
-  $('h1').prepend('<button id="popup3-btn" class="button btn-primary">click me to show popup</button>')
-  $('#popup3-btn').css('height', '100px').css('width', '300px').css('border-radius', '5px')
+  $("h1").prepend(
+    '<button id="popup3-btn" class="button btn-primary">click me to show popup</button>'
+  );
+  $("#popup3-btn")
+    .css("height", "100px")
+    .css("width", "300px")
+    .css("border-radius", "5px");
 
-  document.getElementById('popup3-btn').addEventListener('click', function() {
-    document.getElementById('popup3').style.visibility = 'visible'
-  })
+  document.getElementById("popup3-btn").addEventListener("click", function () {
+    document.getElementById("popup3").style.visibility = "visible";
+  });
 
-// when popup3 is displayed, when the text is scrolled all the way to the bottom, display close button
-//$('#popup3 .popup').scrollTop() + $('#popup3 .popup').height() == $('#popup3 .popup').height()
+  // when popup3 is displayed, when the text is scrolled all the way to the bottom, display close button
+  //$('#popup3 .popup').scrollTop() + $('#popup3 .popup').height() == $('#popup3 .popup').height() - a bit wrong logic
 
+  // .on(what event it's listening for) is listening
+  // .trigger(event name here) is actually firing the event
+
+  $("#popup3 .popup").scroll(function () {
+    if ($("#popup3 .popup").scrollTop() + $("#popup3 .popup").height() - 15 == $("#popup3 #dialog").height()) {
+      $("#popup3 .close").css("visibility", "visible");
+    }
+
+    // make the close button work in popup3
+    $("#popup3 .close").on("click", function () {
+      $('#popup3').css('visibility', 'hidden')
+      $('#popup3 .close').css('visibility', 'hidden')
+    });
+
+  });
 })(jQuery);
