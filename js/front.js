@@ -227,3 +227,24 @@ $.fn.alignElementsSameHeight = function () {
 
 
 }
+
+
+// my code - exercises
+// product page has pathname /detail.html
+
+
+// when user reaches the product page, trigger a view:productPage event
+// when window.location.pathname = '/detail.html', trigger view:
+$(document).trigger('view:productPage')
+
+
+// when user reaches the product page, inspect the breadcrumb element (which category in category in category the user is in)
+// if breadcrumbs include "male", trigger customer:Male
+// if breadcrumbs include "female", trigger customer:Female
+// if breadcrumbs include "{product subcategory}", trigger view:{product subcategory}
+
+
+// when user reaches the /checkout4.html page, trigger "conversion" event WHEN user clicks on "Place an Order" btn
+
+
+// in "conversion" event, put extra object parameter {name, qualtity, unit price} of each purchased product
